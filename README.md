@@ -1,15 +1,52 @@
-# GPU open analytics initiative
+# READ ME
 
-Continuum Analytics, H2O.ai, and MapD Technologies have announced the formation of the GPU Open Analytics Initiative (GOAI) to create common data frameworks enabling developers and statistical researchers to accelerate data science on GPUs. GOAI will foster the development of a data science ecosystem on GPUs by allowing resident applications to interchange data seamlessly and efficiently. 
+## Additional Packages
 
-![GOAI](img/goai_logo_3.png)
+The following files must be downloaded separately.
 
-## GPU Data Frame
+* `./demo/packages/mapd-2.3.1dev-20170414-67568ff-Linux-x86_64.tar.gz`
 
-Our first project: an open source GPU Data Frame with a corresponding Python API. The GPU Data Frame is a common API that enables efficient interchange of data between processes running on the GPU. End-to-end computation on the GPU avoids transfers back to the CPU or copying of in-memory data reducing compute time and cost for high-performance analytics common in artificial intelligence workloads. Users of the MapD Core database can output the results of a SQL query into the GPU Data Frame, which then can be manipulated by the Continuum Analytics’ Anaconda NumPy-like Python API or used as input into the H2O suite of machine learning algorithms without additional data manipulation.
+    Contact mapd for this tarball.
 
-![Architecture](img/GPU_df_arch_diagram.png)
+* `./demo/packages/pygdf.tar.gz`
 
-Users of the MapD Core database can output the results of a SQL query into the GPU Data Frame, which then can be manipulated by the Continuum Analytics’ Anaconda NumPy-like Python API or used as input into the H2O suite of machine learning algorithms without additional data manipulation. In early internal tests, this approach exhibited order-of-magnitude improvements in processing times compared to passing the data between applications on a CPU. 
+    Can be created by:
 
-![Architecture](img/mapd-conda-h2o.png)
+    ```bash
+    git clone git@gitlab.com:nvcollab/pygdf.git
+    tar -czvf pygdf.tar.gz pygdf
+    ```
+
+(Note: this will be easier once the packages are public.)
+
+
+## Docker Build
+
+```bash
+docker build -t conda_cuda_base:latest ./base
+docker build -t cudf:latest ./demo
+```
+
+## Run Docker
+
+```bash
+nvidia-docker run -p 8888:8888 -ti cudf:latest
+```
+
+This launches the mapd, and the notebook automatically.
+
+Login to the notebook with your browser by following the URL printed on the terminal.
+
+Open `mapd_to_pygdf_to_matrix_2-smallipums.ipynb` and hit "Run All" to test.
+This notebook should run to the end without error.
+
+
+## Diagnostic
+
+To run on specific GPUs, use [NV_GPU](https://github.com/NVIDIA/nvidia-docker/wiki/nvidia-docker#gpu-isolation).
+
+For example:
+
+```bash
+NV_GPU=0 nvidia-docker run -p 8888:8888 -ti cudf:latest
+```
