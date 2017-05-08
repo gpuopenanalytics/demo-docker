@@ -13,7 +13,6 @@ The following files must be downloaded separately.
     Can be created by:
 
     ```bash
-    git clone git@gitlab.com:nvcollab/pygdf.git
     tar -czvf pygdf.tar.gz pygdf
     ```
 
