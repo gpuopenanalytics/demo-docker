@@ -1,4 +1,10 @@
-# READ ME
+# README
+
+## PYGDF end-to-end example.
+
+In this demo, we will train 4000 regularized linear regression models on the U.S. Census dataset, with the goal to predict the income of a person, given approximately 447 data points (such as age, occupation, zip code, etc.)
+
+By using multiple GPUs, we are able to speed up this process significantly, and can train about 40 models per second (on a DGX-1 with 8 GPUs)
 
 ## Additional Packages
 
