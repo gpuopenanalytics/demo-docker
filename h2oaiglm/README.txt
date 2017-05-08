@@ -15,3 +15,12 @@ export CUDADIR=/usr/local/cuda/include/
 export OMP_NUM_THREADS=32
 export MKL_NUM_THREADS=32
 export VECLIB_MAXIMUM_THREADS=32
+
+
+Copyright
+---------
+Copyright (c) 2017, H2O.ai, Inc., Mountain View, CA
+Apache License Version 2.0 (see LICENSE file)
+
+This software is based on original work under BSD-3 license by:
+Copyright (c) 2015, Christopher Fougner, Stephen Boyd, Stanford University
