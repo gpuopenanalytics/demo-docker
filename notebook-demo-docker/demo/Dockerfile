@@ -3,6 +3,7 @@ FROM conda_cuda_base:latest
 USER root
 # Install Java
 RUN apt-get install -y openjdk-7-jre
+RUN apt-get install -y libopenblas-dev
 
 USER appuser
 # Add MapD
@@ -24,5 +25,8 @@ RUN conda install conda-build -y
 # Add utils script
 COPY ./packages/utils ./utils
 RUN ln -s ./utils/start_demo.sh ./start_demo.sh
+
+# Add h2oaiglm
+RUN bash ./utils/pip_install_h2oaiglm.sh
 
 CMD bash ./utils/start_demo_notebook.sh
