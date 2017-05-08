@@ -36,7 +36,7 @@ This launches the mapd, and the notebook automatically.
 
 Login to the notebook with your browser by following the URL printed on the terminal.
 
-Open `mapd_to_pygdf_to_matrix_2-smallipums.ipynb` and hit "Run All" to test.
+Open `mapd_to_pygdf_to_h2oaiglm.ipynb` and hit "Run All" to test.
 This notebook should run to the end without error.
 
 
