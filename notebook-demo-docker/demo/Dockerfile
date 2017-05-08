@@ -7,10 +7,10 @@ RUN apt-get install -y libopenblas-dev
 
 USER appuser
 # Add MapD
-COPY ./packages/mapd-2.3.1dev-20170414-67568ff-Linux-x86_64.tar.gz ./mapd.tar.gz
+COPY ./packages/mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64.tar.gz ./mapd.tar.gz
 # Extract MapD
 RUN tar -xvf mapd.tar.gz
-RUN ln -s mapd-2.3.1dev-20170414-67568ff-Linux-x86_64 ./mapd
+RUN ln -s mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64 ./mapd
 
 # Prepend path to libcuda and libjvm for mapd
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server/:/usr/local/nvidia/lib64/

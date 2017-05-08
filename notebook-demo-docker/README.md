@@ -4,16 +4,17 @@
 
 The following files must be downloaded separately.
 
-* `./demo/packages/mapd-2.3.1dev-20170414-67568ff-Linux-x86_64.tar.gz`
+* `./demo/packages/mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64.tar.gz`
 
-    Contact mapd for this tarball.
+    Can be downloaded by:
+    `wget https://builds.mapd.com/os/mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64.tar.gz`
 
 * `./demo/packages/pygdf.tar.gz`
 
     Can be created by:
 
     ```bash
-    git clone git@gitlab.com:nvcollab/pygdf.git
+    git clone https://github.com/gpuopenanalytics/pygdf.git
     tar -czvf pygdf.tar.gz pygdf
     ```
 
