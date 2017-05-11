@@ -1,3 +1,8 @@
+# This Dockerfile take two optional build arguments:
+# - MAPD_FILE is the name of the tarball for the mapd package.
+#   Defaults to "mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64"
+# - PYGDF_COMMIT is the commit to use from the pygdf repo.
+#   Defaults to "master".
 FROM conda_cuda_base:latest
 
 USER root
@@ -7,18 +12,19 @@ RUN apt-get install -y libopenblas-dev
 
 USER appuser
 # Add MapD
-COPY ./packages/mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64.tar.gz ./mapd.tar.gz
+ARG MAPD_FILE="mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64"
+RUN wget https://builds.mapd.com/os/${MAPD_FILE}.tar.gz
 # Extract MapD
-RUN tar -xvf mapd.tar.gz
-RUN ln -s mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64 ./mapd
+RUN tar -xvf ${MAPD_FILE}.tar.gz
+RUN ln -s $MAPD_FILE ./mapd
 
 # Prepend path to libcuda and libjvm for mapd
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server/:/usr/local/nvidia/lib64/
 RUN echo $LD_LIBRARY_PATH
 
 # Add pygdf
-COPY ./packages/pygdf.tar.gz ./pygdf.tar.gz
-RUN tar -xvf ./pygdf.tar.gz
+ARG PYGDF_COMMIT="master"
+RUN git clone https://github.com/gpuopenanalytics/pygdf && cd pygdf && git checkout $PYGDF_COMMIT
 RUN conda env create -f=pygdf/conda_environments/notebook_py35.yml && conda clean -iltpsy
 RUN conda install conda-build=2.1.10 -y
 

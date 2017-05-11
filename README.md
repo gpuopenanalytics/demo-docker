@@ -6,26 +6,9 @@ In this demo, we will train 4000 regularized linear regression models on the U.S
 
 By using multiple GPUs, we are able to speed up this process significantly, and can train about 40 models per second (on a DGX-1 with 8 GPUs)
 
-## Additional Packages
-
-The following files must be downloaded separately.
-
-* `./demo/packages/mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64.tar.gz`
-
-    Can be downloaded by:
-    `wget https://builds.mapd.com/os/mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64.tar.gz`
-
-* `./demo/packages/pygdf.tar.gz`
-
-    Can be created by:
-
-    ```bash
-    git clone https://github.com/gpuopenanalytics/pygdf.git
-    tar -czvf pygdf.tar.gz pygdf
-    ```
-
-
 ## Docker Build
+
+To build the docker image, go into the `./notebook-demo-docker` and run:
 
 ```bash
 docker build -t conda_cuda_base:latest ./base
