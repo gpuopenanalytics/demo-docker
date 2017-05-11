@@ -8,7 +8,7 @@ cmd="nohup ./start_mapd.sh"
 $cmd &disown
 
 echo "Wait for mapd to start"
-sleep 5
+sleep 10
 
 # load data
 echo "Import CSV"
