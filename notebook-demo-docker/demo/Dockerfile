@@ -20,7 +20,7 @@ RUN echo $LD_LIBRARY_PATH
 COPY ./packages/pygdf.tar.gz ./pygdf.tar.gz
 RUN tar -xvf ./pygdf.tar.gz
 RUN conda env create -f=pygdf/conda_environments/notebook_py35.yml && conda clean -iltpsy
-RUN conda install conda-build -y
+RUN conda install conda-build=2.1.10 -y
 
 # Add utils script
 COPY ./packages/utils ./utils
