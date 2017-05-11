@@ -1,3 +1,8 @@
+# This Dockerfile take two optional build arguments:
+# - MAPD_FILE is the name of the tarball for the mapd package.
+#   Defaults to "mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64"
+# - PYGDF_COMMIT is the commit to use from the pygdf repo.
+#   Defaults to "master".
 FROM conda_cuda_base:latest
 
 USER root
