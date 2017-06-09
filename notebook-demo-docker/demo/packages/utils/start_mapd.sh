@@ -1,2 +1,2 @@
 cd ~/mapd/
-echo "n" | ./startmapd
+./startmapd --non-interactive
