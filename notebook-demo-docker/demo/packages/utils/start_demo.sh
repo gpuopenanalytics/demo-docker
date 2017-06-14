@@ -12,4 +12,4 @@ sleep 10
 
 # load data
 echo "Import CSV"
-./create_ipums_easy.sh
+bash ./create_ipums_easy.sh
