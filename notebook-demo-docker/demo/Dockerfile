@@ -12,7 +12,7 @@ RUN apt-get install -y libopenblas-dev
 
 USER appuser
 # Add MapD
-ARG MAPD_FILE="mapd-os-3.0.1dev-20170508-21fc39f-Linux-x86_64"
+ARG MAPD_FILE="mapd-os-3.1.1-20170628-45a6fa8-Linux-x86_64"
 RUN wget https://builds.mapd.com/os/${MAPD_FILE}.tar.gz
 # Extract MapD
 RUN tar -xvf ${MAPD_FILE}.tar.gz
