@@ -11,14 +11,14 @@ By using multiple GPUs, we are able to speed up this process significantly, and 
 To build the docker image, go into the `./notebook-demo-docker` and run:
 
 ```bash
-docker build -t conda_cuda_base:latest ./base
-docker build -t cudf:latest ./demo
+docker build -t goai/base:latest ./base
+docker build -t goai/demo:latest ./demo
 ```
 
 ## Run Docker
 
 ```bash
-nvidia-docker run -p 8888:8888 -ti cudf:latest
+nvidia-docker run -p 8888:8888 -ti goai/demo:latest
 ```
 
 This launches the mapd, and the notebook automatically.
@@ -36,5 +36,5 @@ To run on specific GPUs, use [NV_GPU](https://github.com/NVIDIA/nvidia-docker/wi
 For example:
 
 ```bash
-NV_GPU=0 nvidia-docker run -p 8888:8888 -ti cudf:latest
+NV_GPU=0 nvidia-docker run -p 8888:8888 -ti goai/demo:latest
 ```
