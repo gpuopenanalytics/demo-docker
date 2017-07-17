@@ -23,7 +23,7 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/a
 RUN echo $LD_LIBRARY_PATH
 
 # Add pygdf (pin to last known working commit)
-ARG PYGDF_COMMIT="c122d03"
+ARG PYGDF_COMMIT="485cf15"
 RUN git clone https://github.com/gpuopenanalytics/pygdf && cd pygdf && git checkout $PYGDF_COMMIT
 RUN conda env create -f=pygdf/conda_environments/notebook_py35.yml && conda clean -iltpsy
 RUN conda install conda-build=2.1.10 -y
