@@ -15,13 +15,10 @@ RUN bash Miniconda3-4.3.11-Linux-x86_64.sh -b -p /home/appuser/Miniconda3
 # Append PATH to miniconda
 ENV PATH=$PATH:/home/appuser/Miniconda3/bin
 
-# Install Jupyter Notebook
-RUN conda install -y jupyter notebook
+# Install Java
+USER root
+RUN apt-get update --fix-missing
+RUN apt-get install -y openjdk-7-jre
+RUN apt-get install -y libopenblas-dev
 
-# Install cudatoolkit
-RUN conda install -y -c numba cudatoolkit=8
-
-# Install Numba
-ARG NUMBA_VERSION=0.33
-RUN conda install -y -c numba numba=$NUMBA_VERSION
-
+USER appuser
