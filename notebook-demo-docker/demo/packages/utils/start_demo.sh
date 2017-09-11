@@ -13,3 +13,4 @@ sleep 10
 # load data
 echo "Import CSV"
 bash ./create_ipums_easy.sh
+bash ./create_player_attributes.sh
