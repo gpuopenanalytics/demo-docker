@@ -8,7 +8,7 @@ FROM goai/base:latest
 USER appuser
 # Add MapD
 # Manually downloaded mapd
-ENV MAPD_FILE="mapd-os-3.1.2dev-20170706-21f114c-Linux-x86_64"
+ENV MAPD_FILE="mapd-os-3.2.3dev-20170909-e7053e6-Linux-x86_64-open"
 COPY ./packages/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
 # Extract MapD
 RUN tar -xvf ${MAPD_FILE}.tar.gz
@@ -28,7 +28,7 @@ RUN conda install -y --no-update-deps jupyter notebook
 
 # Add h2oaiglm dep
 RUN conda install -y --no-update-deps pandas seaborn psutil scipy
-RUN pip install https://s3.amazonaws.com/h2o-beta-release/goai/h2oaiglm-0.0.1-py2.py3-none-any.whl
+# RUN pip install https://s3.amazonaws.com/h2o-beta-release/goai/h2oaiglm-0.0.1-py2.py3-none-any.whl
 RUN pip install py3nvml
 
 # Add utils script
