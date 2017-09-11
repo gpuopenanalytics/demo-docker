@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-devel-ubuntu14.04
+FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
 RUN apt-get update
 RUN apt-get install -y wget git vim
@@ -18,7 +18,7 @@ ENV PATH=$PATH:/home/appuser/Miniconda3/bin
 # Install Java
 USER root
 RUN apt-get update --fix-missing
-RUN apt-get install -y openjdk-7-jre
+RUN apt-get install -y default-jre-headless
 RUN apt-get install -y libopenblas-dev
 
 USER appuser
