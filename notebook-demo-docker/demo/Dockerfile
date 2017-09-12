@@ -9,9 +9,8 @@ USER appuser
 # Add MapD
 # Manually downloaded mapd
 ENV MAPD_FILE="mapd-os-3.2.3dev-20170909-e7053e6-Linux-x86_64-open"
-COPY ./packages/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
+ADD https://mapd-core-os-builds.s3.amazonaws.com/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
 # Extract MapD
-RUN tar -xvf ${MAPD_FILE}.tar.gz
 RUN ln -s $MAPD_FILE ./mapd
 
 # Prepend path to libcuda and libjvm for mapd
