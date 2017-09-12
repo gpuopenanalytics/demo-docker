@@ -9,7 +9,11 @@ USER appuser
 # Add MapD
 # Manually downloaded mapd
 ENV MAPD_FILE="mapd-os-3.2.3dev-20170909-e7053e6-Linux-x86_64-open"
-COPY ./packages/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
+ADD https://mapd-core-os-builds.s3.amazonaws.com/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
+USER root
+RUN chown appuser ${MAPD_FILE}.tar.gz
+
+USER appuser
 # Extract MapD
 RUN tar -xvf ${MAPD_FILE}.tar.gz
 RUN ln -s $MAPD_FILE ./mapd
@@ -30,6 +34,13 @@ RUN conda install -y --no-update-deps jupyter notebook
 RUN conda install -y --no-update-deps pandas seaborn psutil scipy
 # RUN pip install https://s3.amazonaws.com/h2o-beta-release/goai/h2oaiglm-0.0.1-py2.py3-none-any.whl
 RUN pip install py3nvml
+
+# Add h2o4gpu
+ENV H2O4GPU_WHL="h2o4gpu-0.0.3-py2.py3-none-any.whl"
+COPY ./packages/${H2O4GPU_WHL} ${H2O4GPU_WHL}
+RUN pip install ${H2O4GPU_WHL}
+RUN conda install -y --no-deps -c intel icc_rt
+RUN pip uninstall -y numba && conda install -fy numba && python -c 'import numba'
 
 # Add utils script
 COPY ./packages/utils ./utils
