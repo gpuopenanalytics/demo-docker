@@ -28,7 +28,7 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/a
 RUN echo $LD_LIBRARY_PATH
 
 # Add pygdf v0.1.0a2
-RUN conda install -y --no-update-deps -c numba -c defaults -c conda-forge -c gpuopenanalytics/label/dev pygdf=0.1.0a2=py36h01fc00e_27 numba=0.35 cudatoolkit=8
+RUN conda install -y --no-update-deps -c numba -c defaults -c conda-forge -c gpuopenanalytics/label/dev pygdf=0.1.0a2=py36h01fc00e_29 numba=0.35 cudatoolkit=8
 
 # Add pymapd
 RUN conda install -y --no-update-deps  -c defaults -c pymapd/label/dev -c conda-forge -c gpuopenanalytics/label/dev pymapd
