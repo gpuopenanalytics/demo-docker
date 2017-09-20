@@ -37,7 +37,7 @@ RUN conda install -y --no-update-deps jupyter notebook
 
 # Add h2oaiglm dep
 RUN conda install -y --no-update-deps pandas seaborn psutil scipy
-# RUN pip install https://s3.amazonaws.com/h2o-beta-release/goai/h2oaiglm-0.0.1-py2.py3-none-any.whl
+RUN pip install https://s3.amazonaws.com/h2o-beta-release/goai/h2oaiglm-0.0.1-py2.py3-none-any.whl
 RUN pip install py3nvml
 
 # Add h2o4gpu
