@@ -6,10 +6,15 @@
 FROM goai/base:latest
 
 USER appuser
+# Add HAR data
+RUN mkdir data
+RUN wget -nv http://archive.ics.uci.edu/ml/machine-learning-databases/00344/Activity%20recognition%20exp.zip -O "data/Activity recognition exp.zip"
+
 # Add MapD
 # Manually downloaded mapd
 ENV MAPD_FILE="mapd-os-3.2.3dev-20170909-e7053e6-Linux-x86_64-open"
-ADD https://mapd-core-os-builds.s3.amazonaws.com/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
+# ADD https://mapd-core-os-builds.s3.amazonaws.com/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
+COPY ./packages/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
 USER root
 RUN chown appuser ${MAPD_FILE}.tar.gz
 
@@ -23,7 +28,7 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/a
 RUN echo $LD_LIBRARY_PATH
 
 # Add pygdf v0.1.0a2
-RUN conda install -y --no-update-deps -c numba -c defaults -c conda-forge -c gpuopenanalytics/label/dev pygdf=0.1.0a2 numba=0.35 cudatoolkit=8
+RUN conda install -y --no-update-deps -c numba -c defaults -c conda-forge -c gpuopenanalytics/label/dev pygdf=0.1.0a2=py36h01fc00e_29 numba=0.35 cudatoolkit=8
 
 # Add pymapd
 RUN conda install -y --no-update-deps  -c defaults -c pymapd/label/dev -c conda-forge -c gpuopenanalytics/label/dev pymapd
@@ -36,11 +41,14 @@ RUN pip install https://s3.amazonaws.com/h2o-beta-release/goai/h2oaiglm-0.0.1-py
 RUN pip install py3nvml
 
 # Add h2o4gpu
-ENV H2O4GPU_WHL="h2o4gpu-0.0.3-py2.py3-none-any.whl"
+ENV H2O4GPU_WHL="h2o4gpu-0.0.3-py36-none-any.whl"
 COPY ./packages/${H2O4GPU_WHL} ${H2O4GPU_WHL}
 RUN pip install ${H2O4GPU_WHL}
-RUN conda install -y --no-deps -c intel icc_rt
-RUN pip uninstall -y numba && conda install -fy numba && python -c 'import numba'
+RUN pip install feather-format
+
+
+# Extra packages for the demo
+RUN conda install -y holoviews bokeh
 
 # Add utils script
 COPY ./packages/utils ./utils
@@ -49,7 +57,10 @@ RUN ln -s ./utils/start_demo.sh ./start_demo.sh
 COPY ./notebooks ./notebooks
 USER root
 RUN chown -R appuser ./notebooks
+RUN apt-get install -y unzip
+
 
 USER appuser
+RUN bash ./utils/create_har.sh
 
 CMD bash ./utils/start_demo_notebook.sh

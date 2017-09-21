@@ -14,3 +14,4 @@ sleep 10
 echo "Import CSV"
 bash ./create_ipums_easy.sh
 bash ./create_player_attributes.sh
+
