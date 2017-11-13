@@ -1,5 +1,8 @@
 FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
+# needed for source activate with conda
+SHELL ["/bin/bash", "-c"]
+
 RUN apt-get update
 RUN apt-get install -y wget git vim
 
