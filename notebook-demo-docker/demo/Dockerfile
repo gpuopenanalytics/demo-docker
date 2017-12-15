@@ -15,8 +15,7 @@ RUN wget -nv http://archive.ics.uci.edu/ml/machine-learning-databases/00344/Acti
 # Add MapD
 # Manually downloaded mapd
 ENV MAPD_FILE="mapd-os-3.2.3dev-20170909-e7053e6-Linux-x86_64-open"
-# ADD https://mapd-core-os-builds.s3.amazonaws.com/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
-COPY ./packages/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
+ADD https://mapd-core-os-builds.s3.amazonaws.com/${MAPD_FILE}.tar.gz ${MAPD_FILE}.tar.gz
 USER root
 RUN chown appuser ${MAPD_FILE}.tar.gz
 
@@ -46,8 +45,13 @@ RUN source activate $PYGDF_CONDA_ENV && pip install https://s3.amazonaws.com/h2o
 RUN source activate $PYGDF_CONDA_ENV && pip install py3nvml
 
 # Add h2o4gpu
-ENV H2O4GPU_WHL="h2o4gpu-0.0.3-py36-none-any.whl"
-COPY ./packages/${H2O4GPU_WHL} ${H2O4GPU_WHL}
+ENV H2O4GPU_WHL="h2o4gpu-0.1.0-py36-none-any.whl"
+ADD https://s3.amazonaws.com/h2o-release/h2o4gpu/releases/bleeding-edge/ai/h2o/h2o4gpu/0.1-nccl-cuda8/${H2O4GPU_WHL} ${H2O4GPU_WHL}
+USER root
+RUN chown appuser ${H2O4GPU_WHL}
+
+# Install h2o4gpu
+USER appuser
 RUN source activate $PYGDF_CONDA_ENV && pip install ${H2O4GPU_WHL}
 RUN source activate $PYGDF_CONDA_ENV && pip install feather-format
 
